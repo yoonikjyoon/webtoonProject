@@ -51,13 +51,24 @@ public class MainApplication extends Application implements ReactApplication {
 
   @Override
   public void onCreate() {
+
     super.onCreate();
+    adjustFontScale(getResources().getConfiguration());
     // If you opted-in for the New Architecture, we enable the TurboModule system
     ReactFeatureFlags.useTurboModules = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
   }
-
+public void adjustFontScale(Context context, Configuration configuration) {
+    if (configuration.fontScale != 1) {
+        configuration.fontScale = 1;
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        wm.getDefaultDisplay().getMetrics(metrics);
+        metrics.scaledDensity = configuration.fontScale * metrics.density;
+        context.getResources().updateConfiguration(configuration, metrics);
+    }
+}
   /**
    * Loads Flipper in React Native templates. Call this in the onCreate method with something like
    * initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
