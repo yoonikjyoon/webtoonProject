@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createStackNavigator} from '@react-navigation/stack';
 // screens
 import Home from '../components/screens/Home';
 
@@ -8,7 +8,7 @@ type StackParamList = {
   Home: undefined;
 };
 
-const Stack = createNativeStackNavigator<StackParamList>();
+const Stack = createStackNavigator<StackParamList>();
 
 export default Navigators = () => {
   return (
