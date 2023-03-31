@@ -5,8 +5,15 @@ import {Button} from 'react-native';
 const Home = () => {
   return (
     <>
-      <Button title="Hello" />
+      <StyledContainerView>
+        <Button title="Hello" />
+      </StyledContainerView>
     </>
   );
 };
 export default Home;
+const StyledContainerView = styled.View`
+  flex: 1;
+  background-color: blue;
+  padding: 30px;
+`;
