@@ -8,9 +8,10 @@
 
 import React from 'react';
 import type {Node} from 'react';
-import {StatusBar} from 'react-native';
+import {StatusBar, Text} from 'react-native';
 import {rootStore, StoreContext} from './stores';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import Navigators from './navigators/index';
 
 const App: () => Node = () => {
   return (
@@ -21,6 +22,7 @@ const App: () => Node = () => {
           translucent
           backgroundColor="transparent"
         />
+        <Navigators />
       </StoreContext.Provider>
     </SafeAreaProvider>
   );
