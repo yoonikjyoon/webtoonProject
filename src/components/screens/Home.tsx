@@ -7,6 +7,7 @@ const Home = () => {
     <>
       <StyledContainerView>
         <Button title="Hello" />
+        {/* <Icon iconName="icon_smile" /> */}
       </StyledContainerView>
     </>
   );
