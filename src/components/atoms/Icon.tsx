@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image} from 'react-native';
-import {getIconProps, IconListKeyType} from 'const/icon';
+import {getIconProps, IconListKeyType} from 'constants/icon';
 
 export interface Props {
   iconName: IconListKeyType;

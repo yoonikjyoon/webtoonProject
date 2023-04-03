@@ -1,4 +1,3 @@
-import {ImageSourcePropType} from 'react-native';
 import {ImageSourcePropType, ImageStyle, StyleProp} from 'react-native';
 
 interface IconListProps {
@@ -19,7 +18,11 @@ type EnforceObjectType<T> = <V extends T>(v: V) => V;
 const enforceObjectType: EnforceObjectType<IconInfo> = v => v;
 
 const ICON_LIST = enforceObjectType({
-  badge_best: {source: require('assets/badge_best.png'), width: 18, height: 18},
+  badge_best: {
+    source: require('assets/badge_best.png'),
+    width: 18,
+    height: 18,
+  },
   icon_challenge: {
     source: require('assets/icon_challenge.png'),
     width: 30,
