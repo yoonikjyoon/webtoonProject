@@ -3,17 +3,17 @@ import styled from 'styled-components/native';
 import {Button} from 'react-native';
 import Icon from 'components/atoms/Icon';
 
-const Home = () => {
+const MyPage = () => {
   return (
     <>
       <StyledContainerView>
-        <Button title="Hello" />
+        <Button title="My Page" />
         <Icon iconName="icon_smile" />
       </StyledContainerView>
     </>
   );
 };
-export default Home;
+export default MyPage;
 const StyledContainerView = styled.View`
   flex: 1;
   background-color: white;
