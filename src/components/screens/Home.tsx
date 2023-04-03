@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import {Button} from 'react-native';
+import Icon from 'components/atoms/Icon';
 
 const Home = () => {
   return (
