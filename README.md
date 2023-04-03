@@ -20,7 +20,7 @@ Clone coding Naver Webtoon using `React Native`
 - [ ] Add horizontal swipe screen.
 - [ ] Add Webtoon list screen by day of the week with horizontal swipe
 - [ ] Add detail page
-- [ ] Add `Bottom Tab`
+- [X] Add `Bottom Tab`
 
 <br/>
 
