@@ -27,15 +27,38 @@ export default Navigators = (): ReactElement => {
       <Stack.Navigator
         initialRouteName="Home"
         screenOptions={{
-          headerShown: false,
           ...TransitionPresets.SlideFromRightIOS,
         }}>
-        <Stack.Screen name="BottomTab" component={BottomTabNavi} />
-        <Stack.Screen name="Main" component={Main} />
-        <Stack.Screen name="Recommend" component={Recommend} />
-        <Stack.Screen name="Challenge" component={Challenge} />
-        <Stack.Screen name="MyPage" component={MyPage} />
-        <Stack.Screen name="More" component={More} />
+        <Stack.Screen
+          name="BottomTab"
+          component={BottomTabNavi}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Main"
+          component={Main}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Recommend"
+          component={Recommend}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Challenge"
+          component={Challenge}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="MyPage"
+          component={MyPage}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="More"
+          component={More}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
