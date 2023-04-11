@@ -6,6 +6,7 @@ export interface ScrollContextInterface {
   maxOffset: number;
   offset: number;
   titleShowing: boolean;
+  offsetY: number;
   updateOffset(val: number): void;
 }
 
@@ -17,6 +18,7 @@ export const ScrollContext = React.createContext<ScrollContextInterface>({
   maxOffset: 0,
   offset: 0,
   titleShowing: false,
+  offsetY: 0,
   updateOffset: (val: nuber) => {},
 });
 
@@ -29,11 +31,13 @@ export const ScrollContextProvider = (props: JSX.Element[] | JSX.Element) => {
   const [offset, setOffset] = useState(0);
   const [titleShowing, setTitleShowing] = useState(false);
   const [opacity, setOpacity] = useState(0);
+  const [offsetY, setOffsetY] = useState(0);
 
   const updateOffset = (val: nubmer) => {
     setOffset(withinLimits(val, minOffset, maxOffset));
     setTitleShowing(val > maxOffset);
     setOpacity(withinLimits((val * maxOffset) / 1000, 0, 1));
+    setOffsetY(val);
   };
 
   return (
@@ -44,6 +48,7 @@ export const ScrollContextProvider = (props: JSX.Element[] | JSX.Element) => {
         offset: offset,
         titleShowing: titleShowing,
         updateOffset: updateOffset,
+        offsetY: offsetY,
       }}>
       {props.children}
     </ScrollContext.Provider>

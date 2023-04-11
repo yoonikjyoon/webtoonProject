@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, Animated, Easing} from 'react-native';
 import {useScroller} from 'context/ScrollContext';
 import styled from 'styled-components/native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 export interface HeaderProps {
   headerLeft?: JSX.Element;
@@ -9,45 +10,58 @@ export interface HeaderProps {
   title: string;
 }
 
-export const Header = (props: HeaderProps) => {
+export const FadeHeader = (props: HeaderProps) => {
+  const insets = useSafeAreaInsets();
   const {titleShowing, opacity} = useScroller();
   const [titleFade] = useState(new Animated.Value(0));
 
   useEffect(() => {
-    titleShowing === false &&
-      Animated.timing(titleFade, {
-        toValue: 0,
-        duration: 200,
-        useNativeDriver: true,
-        easing: Easing.sin,
-      }).start();
-
-    titleShowing === true &&
-      Animated.timing(titleFade, {
-        toValue: 1,
-        duration: 200,
-        useNativeDriver: true,
-        easing: Easing.sin,
-      }).start();
+    Animated.timing(titleFade, {
+      toValue: titleShowing ? 1 : 0,
+      duration: 200,
+      useNativeDriver: true,
+      easing: Easing.sin,
+    }).start();
   });
 
   return (
-    <StyledHeader shadowOpacity={opacity}>
-      <StyledHeaderLeft>
-        {props.headerLeft !== undefined && props.headerLeft}
-      </StyledHeaderLeft>
-      <StyledHeaderAnimated style={{opacity: titleFade}}>
+    <StyledHeaderAnimated
+      style={{
+        opacity: titleFade,
+        paddingTop: insets.top - 5,
+        width: '100%',
+        height: insets.top + 48,
+        backgroundColor: 'white',
+        zIndex: 10,
+      }}>
+      <StyledHeader
+        shadowOpacity={opacity}
+        style={{
+          paddingTop: insets.top,
+          height: insets.top + 48,
+        }}>
+        <StyledHeaderLeft>
+          {props.headerLeft !== undefined && props.headerLeft}
+        </StyledHeaderLeft>
         <StyledTitleText>{props.title}</StyledTitleText>
-      </StyledHeaderAnimated>
-      <StyledHeaderRight>
-        {props.headerRight !== undefined && props.headerRight}
-      </StyledHeaderRight>
-    </StyledHeader>
+        <StyledHeaderRight>
+          {props.headerRight !== undefined && props.headerRight}
+        </StyledHeaderRight>
+      </StyledHeader>
+    </StyledHeaderAnimated>
   );
 };
 
-export default Header;
+export default FadeHeader;
 
+const StyledHeaderAnimated = styled(Animated.View)`
+  display: flex;
+  flex-basis: 33%;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+`;
 const StyledHeader = styled.View<ViewStyle>`
   display: flex;
   width: 100%;
@@ -63,14 +77,6 @@ const StyledHeader = styled.View<ViewStyle>`
   shadow-radius: 15px;
   shadow-opacity: ${({shadowOpacity}) => shadowOpacity};
   z-index: 9;
-`;
-const StyledHeaderAnimated = styled(Animated.View)`
-  display: flex;
-  flex-basis: 33%;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
 `;
 const StyledHeaderLeft = styled.View`
   flex-basis: 33%;
