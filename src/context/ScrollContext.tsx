@@ -4,9 +4,9 @@ import {ScrollView as ScrollViewNative, ScrollViewProps} from 'react-native';
 export interface ScrollContextInterface {
   opacity: number;
   maxOffset: number;
-  offset: number;
+  fadeOffset: number;
   titleShowing: boolean;
-  offsetY: number;
+  scrollOffsetY: number;
   updateOffset(val: number): void;
 }
 
@@ -16,9 +16,9 @@ const withinLimits = (val: number, min: nuber, max: number): number =>
 export const ScrollContext = React.createContext<ScrollContextInterface>({
   opacity: 0,
   maxOffset: 0,
-  offset: 0,
+  fadeOffset: 0, // Header Animation for Fade in / out
   titleShowing: false,
-  offsetY: 0,
+  scrollOffsetY: 0, // Header Animation for translate position Y
   updateOffset: (val: nuber) => {},
 });
 
@@ -28,16 +28,16 @@ export const ScrollContextProvider = (props: JSX.Element[] | JSX.Element) => {
   const minOffset: number = 0;
   const maxOffset: number = 30;
 
-  const [offset, setOffset] = useState(0);
+  const [fadeOffset, setFadeOffset] = useState(0);
   const [titleShowing, setTitleShowing] = useState(false);
   const [opacity, setOpacity] = useState(0);
-  const [offsetY, setOffsetY] = useState(0);
+  const [scrollOffsetY, setScrollOffsetY] = useState(0);
 
   const updateOffset = (val: nubmer) => {
-    setOffset(withinLimits(val, minOffset, maxOffset));
+    setFadeOffset(withinLimits(val, minOffset, maxOffset));
     setTitleShowing(val > maxOffset);
     setOpacity(withinLimits((val * maxOffset) / 1000, 0, 1));
-    setOffsetY(val);
+    setScrollOffsetY(val);
   };
 
   return (
@@ -45,10 +45,10 @@ export const ScrollContextProvider = (props: JSX.Element[] | JSX.Element) => {
       value={{
         opacity: opacity,
         maxOffset: maxOffset,
-        offset: offset,
+        fadeOffset: fadeOffset,
         titleShowing: titleShowing,
         updateOffset: updateOffset,
-        offsetY: offsetY,
+        scrollOffsetY: scrollOffsetY,
       }}>
       {props.children}
     </ScrollContext.Provider>

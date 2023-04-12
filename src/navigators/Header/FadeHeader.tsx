@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, Animated, Easing} from 'react-native';
 import {useScroller} from 'context/ScrollContext';
 import styled from 'styled-components/native';
+import {colors} from 'constants/color';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 export interface HeaderProps {
@@ -25,43 +26,31 @@ export const FadeHeader = (props: HeaderProps) => {
   });
 
   return (
-    <StyledHeaderAnimated
+    <StyledHeader
       style={{
-        opacity: titleFade,
-        paddingTop: insets.top - 5,
-        width: '100%',
+        paddingTop: insets.top,
         height: insets.top + 48,
-        backgroundColor: 'white',
-        zIndex: 10,
       }}>
-      <StyledHeader
-        shadowOpacity={opacity}
+      <StyledHeaderLeft>
+        {props.headerLeft !== undefined && props.headerLeft}
+      </StyledHeaderLeft>
+      <StyledHeaderAnimated
         style={{
-          paddingTop: insets.top,
-          height: insets.top + 48,
+          opacity: titleFade,
+          backgroundColor: 'white',
+          zIndex: 10,
         }}>
-        <StyledHeaderLeft>
-          {props.headerLeft !== undefined && props.headerLeft}
-        </StyledHeaderLeft>
         <StyledTitleText>{props.title}</StyledTitleText>
-        <StyledHeaderRight>
-          {props.headerRight !== undefined && props.headerRight}
-        </StyledHeaderRight>
-      </StyledHeader>
-    </StyledHeaderAnimated>
+      </StyledHeaderAnimated>
+      <StyledHeaderRight>
+        {props.headerRight !== undefined && props.headerRight}
+      </StyledHeaderRight>
+    </StyledHeader>
   );
 };
 
 export default FadeHeader;
 
-const StyledHeaderAnimated = styled(Animated.View)`
-  display: flex;
-  flex-basis: 33%;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-`;
 const StyledHeader = styled.View<ViewStyle>`
   display: flex;
   width: 100%;
@@ -71,12 +60,17 @@ const StyledHeader = styled.View<ViewStyle>`
   justify-content: center;
   align-items: center;
   align-content: center;
-  background-color: white;
-  shadow-color: rgba(36, 36, 44, 0.8);
-  shadow-offset: 0px 1px;
-  shadow-radius: 15px;
-  shadow-opacity: ${({shadowOpacity}) => shadowOpacity};
+  background-color: ${colors.white};
   z-index: 9;
+`;
+const StyledHeaderAnimated = styled(Animated.View)`
+  display: flex;
+  flex-basis: 33%;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-color: ${colors.white};
 `;
 const StyledHeaderLeft = styled.View`
   flex-basis: 33%;
@@ -95,8 +89,7 @@ const StyledHeaderRight = styled.View`
   align-content: center;
 `;
 const StyledTitleText = styled.Text`
-  font-size: 17px;
-  font-weight: bold;
+  font-size: 18px;
   text-align: center;
-  color: green;
+  color: ${colors.black};
 `;
