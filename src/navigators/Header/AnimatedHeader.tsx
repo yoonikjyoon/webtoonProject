@@ -4,10 +4,11 @@ import {useScroller} from 'context/ScrollContext';
 import styled from 'styled-components/native';
 import {colors} from 'constants/color';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import IconButton from 'components/atoms/IconButton';
 
 export interface HeaderProps {
-  headerLeft?: JSX.Element;
-  headerRight?: JSX.Element;
+  // headerLeft?: JSX.Element;
+  // headerRight?: JSX.Element;
   title: string;
 }
 
@@ -25,6 +26,14 @@ export const AnimatedHeader = (props: HeaderProps) => {
     }).start();
   }, [scrollOffsetY]);
 
+  const handleCookieOnPress = () => {
+    console.log('clicked cookie!');
+  };
+
+  const handleSearchOnPress = () => {
+    console.log('clicked search!');
+  };
+
   return (
     <StyledHeaderAnimated
       style={{
@@ -33,11 +42,16 @@ export const AnimatedHeader = (props: HeaderProps) => {
         height: headerOffsetY,
       }}>
       <StyledHeaderLeft>
-        {props.headerLeft !== undefined && props.headerLeft}
+        <IconButton iconName="icon_cookie" onPress={handleCookieOnPress} />
+        <IconButton iconName="icon_bubble" onPress={handleCookieOnPress} />
       </StyledHeaderLeft>
       <StyledTitleText>{props.title}</StyledTitleText>
       <StyledHeaderRight>
-        {props.headerRight !== undefined && props.headerRight}
+        <IconButton
+          iconName="icon_search"
+          onPress={handleSearchOnPress}
+          hitSlop={5}
+        />
       </StyledHeaderRight>
     </StyledHeaderAnimated>
   );
@@ -56,6 +70,12 @@ const StyledHeaderAnimated = styled(Animated.View)`
   background-color: white;
   z-index: 9;
 `;
+const StyledTitleText = styled.Text`
+  flex-basis: 33%;
+  font-size: 18px;
+  text-align: center;
+  color: ${colors.black};
+`;
 const StyledHeaderLeft = styled.View`
   flex-basis: 33%;
   display: flex;
@@ -63,6 +83,7 @@ const StyledHeaderLeft = styled.View`
   justify-content: flex-start;
   align-items: center;
   align-content: center;
+  padding-left: 9px;
 `;
 const StyledHeaderRight = styled.View`
   flex-basis: 33%;
@@ -71,9 +92,5 @@ const StyledHeaderRight = styled.View`
   justify-content: flex-end;
   align-items: center;
   align-content: center;
-`;
-const StyledTitleText = styled.Text`
-  font-size: 18px;
-  text-align: center;
-  color: ${colors.black};
+  padding-right: 15px;
 `;

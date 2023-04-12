@@ -67,15 +67,20 @@ const ICON_LIST = enforceObjectType({
   },
   icon_cookie: {
     source: require('assets/icon_cookie.png'),
-    width: 18,
-    height: 18,
+    width: 36,
+    height: 36,
   },
   icon_down: {source: require('assets/icon_down.png'), width: 18, height: 10},
   icon_plus: {source: require('assets/icon_plus.png'), width: 18, height: 18},
   icon_search: {
     source: require('assets/icon_search.png'),
-    width: 48,
-    height: 48,
+    width: 20,
+    height: 20,
+  },
+  icon_bubble: {
+    source: require('assets/icon_bubble.png'),
+    width: 72,
+    height: 36,
   },
   // icon_: {source: require('assets/icon_.png'), width: 0, height: 0},
 });

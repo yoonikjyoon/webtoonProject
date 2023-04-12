@@ -12,8 +12,8 @@ const Main = () => {
   return (
     // <SafeAreaView style={{flex: 1}}>
     <ScrollContextProvider>
-      {/* <AnimatedHeader title="WebToon" /> */}
-      <FadeHeader title="WebToon" />
+      <AnimatedHeader title="WebToon" />
+      {/* <FadeHeader title="WebToon" /> */}
       <ScrollView>
         <Button title="WebToon" />
         <Icon iconName="icon_webtoon" />
