@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native';
 import styled from 'styled-components/native';
 import AnimatedHeader from 'navigators/Header/AnimatedHeader';
@@ -7,14 +7,37 @@ import {Button} from 'react-native';
 import Icon from 'components/atoms/Icon';
 import {ScrollContextProvider} from 'context/ScrollContext';
 import {ScrollView} from 'context/ScrollContext';
+import ScrollableTab, {TabType} from 'components/molecules/ScrollableTab';
+
+const tabList: TabType[] = [
+  {label: '신작', value: 7},
+  {label: '매일+', value: 8},
+  {label: '월', value: 1},
+  {label: '화', value: 2},
+  {label: '수', value: 3},
+  {label: '목', value: 4},
+  {label: '금', value: 5},
+  {label: '토', value: 6},
+  {label: '일', value: 0},
+  {label: '완결', value: 9},
+];
 
 const Main = () => {
+  const [dayOfWeek, setDayOfWeek] = useState();
+  useEffect(() => {
+    const now = new Date().getDay();
+    const found = tabList.find(item => item.value === now);
+    setDayOfWeek(found.value);
+  }, []);
   return (
-    // <SafeAreaView style={{flex: 1}}>
     <ScrollContextProvider>
       <AnimatedHeader title="WebToon" />
-      {/* <FadeHeader title="WebToon" /> */}
       <ScrollView>
+        <ScrollableTab
+          tab={tabList}
+          selectedValue={dayOfWeek}
+          onChangeValue={value => setDayOfWeek(value)}
+        />
         <Button title="WebToon" />
         <Icon iconName="icon_webtoon" />
         <Button title="WebToon" />
@@ -49,7 +72,6 @@ const Main = () => {
         <Icon iconName="icon_webtoon" />
       </ScrollView>
     </ScrollContextProvider>
-    // </SafeAreaView>
   );
 };
 export default Main;
