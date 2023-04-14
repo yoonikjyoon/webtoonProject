@@ -29,14 +29,15 @@ const ScrollableTab = ({
 }: Props) => {
   const flatListRef = useRef<FlatList<TabType>>(null);
 
-  // useEffect(() => {
-  //   const index = tab.findIndex(data => data.value === selectedValue);
-  //   flatListRef.current?.scrollToIndex({
-  //     animated: true,
-  //     index,
-  //     viewPosition: 0.5,
-  //   });
-  // }, [selectedValue]);
+  useEffect(() => {
+    const index =
+      selectedValue && tab.findIndex(data => data.value === selectedValue);
+    flatListRef.current?.scrollToIndex({
+      animated: true,
+      index: index ? index : 0,
+      viewPosition: 0.5,
+    });
+  }, [selectedValue]);
   return (
     <StyledContainerView backgroundColor={color ? color : colors.white}>
       <FlatList<TabType>
@@ -46,6 +47,15 @@ const ScrollableTab = ({
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{flexGrow: 1}}
+        onScrollToIndexFailed={info => {
+          const wait = new Promise(resolve => setTimeout(resolve, 500));
+          wait.then(() => {
+            flatListRef.current?.scrollToIndex({
+              animated: true,
+              index: info.index,
+            });
+          });
+        }}
         renderItem={({item, index}) => (
           <TabUnderLineButton
             key={index}
