@@ -14,7 +14,7 @@ export interface HeaderProps {
 
 export const AnimatedHeader = (props: HeaderProps) => {
   const insets = useSafeAreaInsets();
-  const headerOffsetY = insets.top + 48;
+  const headerOffsetY = insets.top + 48; // 107
   const {scrollOffsetY} = useScroller();
   const [animatedHeader] = useState(new Animated.Value(0));
 
@@ -27,7 +27,8 @@ export const AnimatedHeader = (props: HeaderProps) => {
   }, [scrollOffsetY]);
 
   const handleCookieOnPress = () => {
-    console.log('clicked cookie!');
+    console.log('clicked cookie!', insets);
+    // {"bottom": 34, "left": 0, "right": 0, "top": 59}
   };
 
   const handleSearchOnPress = () => {
@@ -60,6 +61,7 @@ export const AnimatedHeader = (props: HeaderProps) => {
 export default AnimatedHeader;
 
 const StyledHeaderAnimated = styled(Animated.View)`
+  position: absolute;
   display: flex;
   flex-direction: row;
   width: 100%;
