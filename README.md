@@ -15,8 +15,8 @@ Clone coding Naver Webtoon using `React Native`
 ## 🫧 Features in progress ... ⚒️ 
 <!-- <img width="50%" src="https://user-images.githubusercontent.com/118039042/224942835-433a3ef1-d329-4fc8-8031-ae9d7f4315ee.png"> -->
 
-- [ ] Add `Header` on the top
-- [ ] Display `Header` and `Footer` on scroll, but hide when scrolled to the top
+- [X] Add `Header` on the top
+- [X] Display `Header` and `Footer` on scroll, but hide when scrolled to the top
 - [ ] Add horizontal swipe screen.
 - [ ] Add Webtoon list screen by day of the week with horizontal swipe
 - [ ] Add detail page
