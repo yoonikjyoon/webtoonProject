@@ -13,6 +13,7 @@ import {
   SCROLLABLE_TAB_HEIGHT,
   COLLAPSIBLE_HEADER_HEIGHT,
 } from 'constants/common';
+import ListItem from 'components/molecules/ListItem';
 
 const tabList: TabType[] = [
   {label: '신작', value: 7},
@@ -39,18 +40,20 @@ const Main = () => {
   }, []);
   return (
     <ScrollContextProvider>
-      <AnimatedHeader title="WebToon" />
+      {/* <AnimatedHeader title="WebToon" /> */}
       <ScrollableTab
         tab={tabList}
         selectedValue={dayOfWeek}
         onChangeValue={value => setDayOfWeek(value)}
       />
       <ScrollView style={{paddingTop: headerPadding}}>
-        <Button title="WebToon" />
-        <Icon iconName="icon_webtoon" />
-        <Button title="WebToon" />
-        <Icon iconName="icon_webtoon" />
-        <Button title="WebToon" />
+        {/* <ScrollView>
+        <ScrollableTab
+          tab={tabList}
+          selectedValue={dayOfWeek}
+          onChangeValue={value => setDayOfWeek(value)}
+        /> */}
+        <ListItem imageUrl="test" weekday="목" hasBadge={true} />
         <Icon iconName="icon_webtoon" />
         <Button title="WebToon" />
         <Icon iconName="icon_webtoon" />

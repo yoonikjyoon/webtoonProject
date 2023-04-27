@@ -1,2 +1,4 @@
 export const SCROLLABLE_TAB_HEIGHT = 48;
-export const COLLAPSIBLE_HEADER_HEIGHT = 96;
+export const COLLAPSIBLE_HEADER_HEIGHT = 130;
+
+export const PADDING_HORIZONTAL = 30;
